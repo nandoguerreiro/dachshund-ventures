@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dachshund Ventures</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a sober institutional document. Left-hand section labels, a wide
+   reading column, hairline rules, no illustration. Single light theme by choice. */
+:root {
+  --paper: #FFFFFF;
+  --surface: #F4F5F7;
+  --ink: #0D1B2E;
+  --ink-soft: #566170;
+  --rule: #D9DDE3;
+  --accent: #1E4170;
+  --display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --body: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--body); font-size: 17px; line-height: 1.6;
+}
+a { color: inherit; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+p, h1, h2, h3, ul, ol, dl, dd { margin: 0; }
+h1, h2, h3 { text-wrap: balance; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+
+/* Header */
+.top {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px 28px; flex-wrap: wrap;
+  padding: 26px 0; border-bottom: 1px solid var(--rule);
+}
+.mark { font-family: var(--display); font-weight: 600; font-size: 21px; letter-spacing: 0.01em; }
+.nav { display: flex; gap: 6px 26px; flex-wrap: wrap; font-size: 14.5px; font-weight: 500; }
+.nav a { text-decoration: none; color: var(--ink-soft); }
+.nav a:hover { color: var(--ink); }
+.nav a.strong { color: var(--accent); font-weight: 600; }
+
+.label {
+  font-size: 12.5px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* Hero */
+.hero { padding: 88px 0 80px; display: flex; flex-direction: column; gap: 28px; }
+.hero h1 {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(34px, 5.2vw, 60px); line-height: 1.1; letter-spacing: -0.015em; max-width: 24ch;
+}
+.lede { max-width: 62ch; font-size: clamp(18px, 1.9vw, 20.5px); line-height: 1.55; color: var(--ink); }
+.hero-foot { display: flex; align-items: center; gap: 14px 24px; flex-wrap: wrap; margin-top: 6px; }
+.btn {
+  display: inline-block; background: var(--ink); color: var(--paper);
+  font-weight: 600; font-size: 15px; padding: 13px 24px; border-radius: 3px; text-decoration: none;
+}
+.btn:hover { background: var(--accent); }
+.hero-foot .btn-text { font-weight: 600; font-size: 15px; text-decoration: none; padding: 13px 4px; border-bottom: 2px solid transparent; }
+.hero-foot .btn-text:hover { border-bottom-color: var(--ink); }
+.hero-note { font-size: 14px; color: var(--ink-soft); }
+.card-cta { align-self: flex-start; margin-top: 8px; font-weight: 600; font-size: 15px; color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+.card-cta:hover { border-bottom-color: var(--accent); }
+.cta-band {
+  margin-top: 34px; padding: 26px 28px; background: var(--surface); border-left: 3px solid var(--accent);
+  display: flex; justify-content: space-between; align-items: center; gap: 18px 32px; flex-wrap: wrap;
+}
+.cta-band > div { display: flex; flex-direction: column; gap: 4px; max-width: 48ch; }
+.cta-band b { font-family: var(--display); font-weight: 600; font-size: 21px; line-height: 1.25; }
+.cta-band .sub { font-size: 15.5px; color: var(--ink-soft); }
+
+/* Sections: label column + content column */
+section.row {
+  display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 20px 56px;
+  padding: 64px 0; border-top: 1px solid var(--rule);
+}
+.row h2 {
+  font-family: var(--display); font-weight: 500; font-size: clamp(25px, 3vw, 34px);
+  line-height: 1.18; letter-spacing: -0.01em; max-width: 26ch; margin-bottom: 22px;
+}
+.content { display: flex; flex-direction: column; gap: 0; min-width: 0; }
+.prose { max-width: 64ch; display: flex; flex-direction: column; gap: 14px; }
+.soft { color: var(--ink-soft); }
+
+/* Numbered statements */
+.points { list-style: none; padding: 0; margin-top: 34px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 36px; }
+.points li { border-top: 2px solid var(--ink); padding-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+.points h3 { font-family: var(--display); font-weight: 600; font-size: 19px; line-height: 1.25; }
+.points p { font-size: 15.5px; color: var(--ink-soft); line-height: 1.55; }
+
+/* Criteria */
+.criteria { list-style: none; padding: 0; counter-reset: c; max-width: 760px; }
+.criteria li {
+  counter-increment: c; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 4px 8px;
+  padding: 15px 0; border-top: 1px solid var(--rule);
+}
+.criteria li:last-child { border-bottom: 1px solid var(--rule); }
+.criteria li::before {
+  content: counter(c, decimal-leading-zero); font-size: 13px; font-weight: 600; color: var(--accent);
+  font-variant-numeric: tabular-nums; padding-top: 3px;
+}
+.criteria b { font-weight: 600; }
+.criteria span { display: block; font-size: 15.5px; color: var(--ink-soft); }
+
+/* Instruments */
+.instruments { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 30px; border: 1px solid var(--rule); }
+.instruments > div { padding: 24px 24px 26px; display: flex; flex-direction: column; gap: 8px; }
+.instruments > div + div { border-left: 1px solid var(--rule); }
+.instruments h3 { font-family: var(--display); font-weight: 600; font-size: 19px; }
+.instruments p { font-size: 15.5px; color: var(--ink-soft); line-height: 1.55; }
+
+/* Status ledger */
+.ledger { max-width: 760px; }
+.ledger div { display: grid; grid-template-columns: minmax(0, 210px) minmax(0, 1fr); gap: 4px 24px; padding: 14px 0; border-top: 1px solid var(--rule); }
+.ledger div:last-child { border-bottom: 1px solid var(--rule); }
+.ledger dt { font-weight: 600; font-size: 15.5px; }
+.ledger dd { font-size: 15.5px; color: var(--ink-soft); }
+
+/* Partners */
+.partners { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--ink); }
+.partners > div { padding: 24px 32px 26px 0; display: flex; flex-direction: column; gap: 8px; border-bottom: 1px solid var(--rule); }
+.partners > div:nth-child(even) { padding-left: 32px; padding-right: 0; border-left: 1px solid var(--rule); }
+.partners h3 { font-family: var(--display); font-weight: 600; font-size: 20px; }
+.partners p { font-size: 15.5px; color: var(--ink-soft); line-height: 1.55; max-width: 46ch; }
+
+/* Founder */
+.founder-name { font-family: var(--display); font-weight: 500; font-size: clamp(25px, 3vw, 34px); line-height: 1.15; margin-bottom: 4px; }
+.founder-role { color: var(--ink-soft); font-size: 15.5px; margin-bottom: 22px; }
+.cv { margin-top: 32px; max-width: 820px; }
+.cv div { display: grid; grid-template-columns: minmax(0, 210px) minmax(0, 1fr); gap: 4px 24px; padding: 18px 0; border-top: 1px solid var(--rule); }
+.cv div:last-child { border-bottom: 1px solid var(--rule); }
+.cv dt { font-family: var(--display); font-weight: 600; font-size: 19px; line-height: 1.25; }
+.cv dt small { display: block; font-family: var(--body); font-weight: 500; font-size: 13px; color: var(--ink-soft); margin-top: 3px; }
+.cv dd { font-size: 15.5px; color: var(--ink-soft); line-height: 1.55; }
+
+/* Contact */
+.contact { background: var(--surface); margin-top: 0; }
+.contact .wrap { padding-top: 72px; padding-bottom: 72px; display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+.contact h2 { font-family: var(--display); font-weight: 400; font-size: clamp(28px, 3.8vw, 42px); line-height: 1.15; letter-spacing: -0.01em; max-width: 22ch; }
+.contact p { max-width: 58ch; color: var(--ink-soft); }
+footer .wrap { padding-top: 22px; padding-bottom: 36px; display: flex; justify-content: space-between; gap: 10px 24px; flex-wrap: wrap; font-size: 13px; color: var(--ink-soft); }
+
+@media (max-width: 820px) {
+  .hero { padding: 56px 0 52px; }
+  section.row { grid-template-columns: minmax(0, 1fr); padding: 48px 0; gap: 12px; }
+  .points, .instruments, .partners { grid-template-columns: minmax(0, 1fr); }
+  .instruments > div + div { border-left: 0; border-top: 1px solid var(--rule); }
+  .partners > div, .partners > div:nth-child(even) { padding: 22px 0; border-left: 0; }
+  .ledger div, .cv div { grid-template-columns: minmax(0, 1fr); }
+  .nav a:not(.strong) { display: none; }
+}
+/* Hero, second pass */
+.hero { padding: 104px 0 96px; gap: 30px; }
+.hero .label { color: #2B5BA6; }
+.hero h1 { font-family: var(--body); font-weight: 700; font-size: clamp(36px, 5.6vw, 66px); line-height: 1.06; letter-spacing: -0.032em; max-width: 21ch; }
+.hero h1 span { color: #2B5BA6; }
+.hero .lede { max-width: 58ch; color: var(--ink-soft); font-size: clamp(18px, 2vw, 22px); }
+.hero-foot { gap: 16px 34px; margin-top: 10px; }
+.btn.btn-lg { padding: 18px 32px; font-size: 17px; border-radius: 6px; background: var(--accent); }
+.btn.btn-lg:hover { background: var(--ink); }
+.hero-foot .btn-text { font-size: 17px; padding: 13px 0; }
+.hero-note { font-size: 14.5px; margin-top: -8px; }
+.partners-intro { max-width: 64ch; margin-bottom: 28px; }
+@media (max-width: 820px) { .hero { padding: 60px 0 56px; } }
+.hero-steps { list-style: none; padding: 24px 0 0; margin: 14px 0 0; border-top: 1px solid var(--rule); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 36px; max-width: 880px; counter-reset: s; }
+.hero-steps li { counter-increment: s; display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; font-size: 15px; line-height: 1.45; color: var(--ink-soft); }
+.hero-steps li::before { content: counter(s); width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid #2B5BA6; color: #2B5BA6; font-weight: 700; font-size: 13px; display: grid; place-items: center; }
+.hero-steps b { display: block; color: var(--ink); font-weight: 600; font-size: 15.5px; }
+@media (max-width: 820px) { .hero-steps { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="mark">Dachshund Ventures</div>
+    <nav class="nav" aria-label="Seções">
+      <a href="#tese">Tese</a>
+      <a href="#criterios">O que buscamos</a>
+      <a href="#como">Como investimos</a>
+      <a href="#parceiros">Parceiros</a>
+      <a href="#quem">Quem está por trás</a>
+      <a class="strong" href="https://www.linkedin.com/in/nandoguerreiro" target="_blank" rel="noopener">Contato</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="label">Investimento e AI para donos de empresas de serviço</div>
+    <h1>Investimos em empresas tradicionais <span>que vão ser transformadas por AI.</span></h1>
+    <p class="lede">Se a sua empresa já tem clientes e receita, trazemos capital e execução de AI para ela render mais e valer mais. O formato se ajusta ao que a empresa precisa: sócio, crédito ou execução remunerada pelo resultado.</p>
+    <div class="hero-foot">
+      <a class="btn btn-lg" href="https://www.linkedin.com/in/nandoguerreiro" target="_blank" rel="noopener">Marcar conversa gratuita &rarr;</a>
+      <a class="btn-text" href="#criterios">Ver o que buscamos &rarr;</a>
+    </div>
+    <ol class="hero-steps">
+      <li><div><b>Envie uma mensagem</b>Pelo LinkedIn, direto para o fundador.</div></li>
+      <li><div><b>30 minutos de conversa</b>Gratuita, confidencial e sem compromisso.</div></li>
+      <li><div><b>Resposta franca</b>Você sai sabendo se há encaixe e qual seria o próximo passo.</div></li>
+    </ol>
+  </div>
+
+  <section class="row" id="tese">
+    <div class="label">Tese</div>
+    <div class="content">
+      <h2>Um mercado que já paga, uma mudança de tecnologia na operação.</h2>
+      <div class="prose">
+        <p>Os melhores negócios nascem quando um mercado que já paga encontra uma mudança de tecnologia. A mudança atual é AI, e ela atua no custo e na qualidade de entregar um serviço.</p>
+        <p>No Brasil, onde o capital sempre foi caro, esse ganho separa as empresas que perdem margem das que passam a gerar caixa de forma consistente. É nesse segundo grupo que queremos investir.</p>
+      </div>
+      <ol class="points">
+        <li>
+          <h3>O ganho operacional é real</h3>
+          <p>Nos casos internacionais de aquisição e transformação com AI, a produtividade sobe de 20 a 40%. Margens de empresa de software ainda não apareceram em balanço auditado.</p>
+        </li>
+        <li>
+          <h3>Eficiência sozinha se perde</h3>
+          <p>Quando o concorrente usa as mesmas ferramentas, o ganho vira desconto para o cliente. Ele permanece na empresa onde a receita é recorrente e o preço não acompanha a queda do custo.</p>
+        </li>
+        <li>
+          <h3>A conta brasileira é outra</h3>
+          <p>Sem dívida barata para comprar e sem contar com uma venda cara na saída. Em compensação, os preços de entrada são menores e há pouca disputa pelos ativos.</p>
+        </li>
+      </ol>
+      <div class="cta-band">
+        <div><div class="label">Para profissionais de AI</div><b>Você já implementou AI numa operação real e mediu o resultado?</b><span class="sub">Buscamos quem execute a transformação nas empresas investidas.</span></div>
+        <a class="btn" href="https://www.linkedin.com/in/nandoguerreiro" target="_blank" rel="noopener">Mostre o seu caso &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" id="criterios">
+    <div class="label">O que buscamos</div>
+    <div class="content">
+      <h2>Critérios para uma empresa entrar na conversa.</h2>
+      <ol class="criteria">
+        <li><div><b>Clientes que já pagam</b><span>Receita e demanda comprovadas pelo serviço.</span></div></li>
+        <li><div><b>Receita recorrente</b><span>Contratos ou hábito de recompra, com preço que não cai junto com o custo.</span></div></li>
+        <li><div><b>Operação intensiva em processo</b><span>Trabalho em que AI muda de forma mensurável o custo e a qualidade da entrega.</span></div></li>
+        <li><div><b>Espaço para ampliar a oferta</b><span>Possibilidade de combinar produto e serviço para o mesmo cliente.</span></div></li>
+        <li><div><b>Retorno pelo caixa</b><span>Depois do investimento, o próprio caixa da empresa precisa entregar o retorno esperado, de Selic + 5% ao ano.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="row" id="como">
+    <div class="label">Como investimos</div>
+    <div class="content">
+      <h2>O instrumento se ajusta a cada negócio.</h2>
+      <div class="prose">
+        <p>Trabalhamos com três formas de entrar em uma empresa e escolhemos, junto com o dono, a que é melhor para o negócio. Cada investimento é estruturado individualmente, em club deal com co-investidores.</p>
+      </div>
+      <div class="instruments">
+        <div>
+          <h3>Participação</h3>
+          <p>Aquisição de participação societária, com envolvimento direto na transformação da operação.</p>
+        </div>
+        <div>
+          <h3>Dívida</h3>
+          <p>Capital para financiar a transformação quando o dono prefere manter a estrutura societária.</p>
+        </div>
+        <div>
+          <h3>Execução com participação no resultado</h3>
+          <p>Implementamos AI na operação e podemos bancar o custo, em troca de uma parcela do ganho gerado.</p>
+        </div>
+      </div>
+      <div class="cta-band">
+        <div><div class="label">Para investidores</div><b>Co-invista negócio a negócio.</b><span class="sub">Enviamos a tese completa e a pesquisa para quem quiser avaliar.</span></div>
+        <a class="btn" href="https://www.linkedin.com/in/nandoguerreiro" target="_blank" rel="noopener">Receba a tese &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" id="parceiros">
+    <div class="label">Parceiros</div>
+    <div class="content">
+      <h2>Quem queremos ao lado nesta construção.</h2>
+      <p class="partners-intro">Estamos construindo um ecossistema para possibilitar o encontro de boas empresas, capital e execução de ponta com AI.</p>
+      <div class="partners">
+        <div>
+          <h3>Empresas</h3>
+          <p>Donos de empresas de serviço com clientes recorrentes que avaliam sucessão, um novo sócio, capital ou apoio para transformar a operação.</p>
+          <a class="card-cta" href="https://www.linkedin.com/in/nandoguerreiro" target="_blank" rel="noopener">Conversar sobre a sua empresa &rarr;</a>
+        </div>
+        <div>
+          <h3>Investidores</h3>
+          <p>Family offices, fundos e pessoas físicas interessados em co-investir negócio a negócio, em participação ou crédito.</p>
+          <a class="card-cta" href="https://www.linkedin.com/in/nandoguerreiro" target="_blank" rel="noopener">Conhecer a tese e co-investir &rarr;</a>
+        </div>
+        <div>
+          <h3>Executores de AI</h3>
+          <p>Times e profissionais que já implementaram AI em operações reais e mediram o efeito em custo, prazo ou margem.</p>
+          <a class="card-cta" href="https://www.linkedin.com/in/nandoguerreiro" target="_blank" rel="noopener">Apresentar sua experiência com AI &rarr;</a>
+        </div>
+        <div>
+          <h3>Pessoas</h3>
+          <p>Operadores, assessores de M&amp;A e especialistas setoriais que queiram discutir a tese, indicar empresas ou participar de um negócio específico.</p>
+          <a class="card-cta" href="https://www.linkedin.com/in/nandoguerreiro" target="_blank" rel="noopener">Discutir a tese &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" id="quem">
+    <div class="label">Quem está por trás</div>
+    <div class="content">
+      <div class="founder-name">Nando Guerreiro</div>
+      <div class="founder-role">Fundador · Luiz Fernando Guerreiro</div>
+      <div class="prose">
+        <p>Empreendedor com trajetória em produto, tecnologia e operação. Cofundou a Petlove e participou de todo o ciclo da empresa, da fundação à saída, incluindo captações e aquisições. Fundou e encerrou a Guarda, experiência que definiu os critérios de pagador claro e disciplina de capital desta tese.</p>
+      </div>
+      <dl class="cv">
+        <div>
+          <dt>Petlove<small>Cofundador</small></dt>
+          <dd>Maior ecossistema pet do Brasil, reunindo produtos, serviços e saúde. De zero a R$ 2 bilhões de receita, com geração de caixa. Saída concluída; segue como cofundador não executivo.</dd>
+        </div>
+        <div>
+          <dt>Guarda<small>Cofundador e CEO</small></dt>
+          <dd>Seguro paramétrico para o agronegócio. Encerrada em 2026, sem um pagador claro para o produto, com devolução de boa parte do capital aos investidores.</dd>
+        </div>
+        <div>
+          <dt>Formação<small>Educação</small></dt>
+          <dd>MBA pelo Insper. Stanford University.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+</div>
+
+<div class="contact" id="contato">
+  <div class="wrap">
+    <div class="label">Contato</div>
+    <h2>As conversas começam pelo LinkedIn.</h2>
+    <p>Se a sua empresa, o seu capital ou a sua experiência com AI se encaixam no que está descrito aqui, envie uma mensagem. Compartilhamos o material da tese com quem quiser aprofundar.</p>
+    <a class="btn" href="https://www.linkedin.com/in/nandoguerreiro" target="_blank" rel="noopener">linkedin.com/in/nandoguerreiro</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>Dachshund Ventures · Brasil</span>
+    <span>Esta página é informativa e não constitui oferta de investimento.</span>
+  </div>
+</footer>
+
+</body>
+</html>
